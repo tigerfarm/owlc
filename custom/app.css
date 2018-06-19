@@ -1,0 +1,95 @@
+#topBar {
+    width: 780px;
+    margin: 6px 0px 0px 120px;
+    padding: 0px 0px 0px 0px;
+}
+#bottomBar {
+    width: 780px;
+    margin: 6px 0px 0px 120px;
+    padding: 6px 0px 20px 0px;
+    font: Helvetica,Arial,sans-serif;
+    font-size: 14px; 
+    text-align: center;
+    color: rgba(255,255,255,.65); 
+    background-color: #080A30;
+}
+#agentList {
+    padding: 0px 0px 20px 0px;
+    text-decoration: none;
+}
+#bottomContent {
+    padding-top: 20px;
+    text-decoration: none;
+}
+a:link, a:visited {
+    text-decoration: none;
+}
+a:hover, a:active {
+    text-decoration: underline;
+}
+
+h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+.company {
+    padding-top: 6px;
+    padding-left: 160px;
+}
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+input {
+    line-height: 1.4em;
+    font-size: 14px;
+    width: 180px;
+}
+
+button.call, button.hangup, button.refresh {
+    width: 10em;
+    height: 2.5em;
+    border-radius: 1em;
+    font-family: "Helvetica Light", Helvetica, sans-serif;
+    font-size: .8em;
+    font-weight: lighter;
+    outline: 0;
+    border-color: #954C08;      /* top border */
+    background-color: #FFF1B3;  /* background color */
+}
+
+button.call:hover,
+button.call:focus,
+button.refresh:hover,
+button.refresh:focus,
+button.hangup:hover,
+button.hangup:focus {
+    text-decoration: none;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+    border-color: #954C08;      /* top hover border */
+    color: #fff;                /* hover text */
+    background-color: #B76418;  /* hover background color */
+}
+
+button.call:active,
+button.call.active,
+button.refresh:active,
+button.refresh.active,
+button.hangup:active,
+button.hangup.active {
+    border-color: #2a65a0;
+    border-bottom-color: #3884CF;
+    background-color: #3072b3;
+}
+
+/* overrides extra padding on button elements in Firefox */
+button.call::-moz-focus-inner,
+button.refresh::-moz-focus-inner,
+button.hangup::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
