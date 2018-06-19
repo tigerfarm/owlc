@@ -6,7 +6,7 @@ Owl Client Screen print:
 
 <img src="ScreenPrint.jpg"/>
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/tigerfarm/OwlClient)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/tigerfarm/owlc)
 
 When you deploy to Heroku, you will be prompted for an app name. 
 The name needs to be unique, example, enter your name+cc (example: davidcc). 
