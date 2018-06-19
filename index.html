@@ -76,7 +76,7 @@
                 // Need to do an Ajax call to a local program that goes and gets the token.
                 logger("Refresh the token using client id: " + clientId);
                 //
-                var jqxhr = $.get("clientTokenGet.php?clientid=" + clientId, function (theToken) {
+                var jqxhr = $.get("clientTokenGet.php?clientid=" + clientId + "&tokenPassword=" + $("#tokenPassword").val(), function (theToken) {
                     // alert("theToken :" + theToken.trim()) + ":");
                     // Twilio.Device documentation: https://www.twilio.com/docs/api/client/device-13
                     // Optional, control sounds:
@@ -151,7 +151,8 @@
             </table>
             <table><tr><td style="width: 80px;">Client ID:</td><td><input type="text" id="clientid" name="clientid" placeholder="Enter client id"/></td><td><div class="curClient">Set Client ID.</div></td></tr></table>
             <table><tr><td style="width: 80px;">Call to:</td><td><input type="text" id="number" name="number" placeholder="Enter who to call"/></td></tr></table>
-            <textarea id="log" readonly="true" style="width: 700px;height: 200px">Agent:</textarea>
+            <table><tr><td style="width: 80px;">Password:</td><td><input type="text" id="number" name="tokenPassword" placeholder="Enter password"/></td></tr></table>
+            <textarea id="log" style="width: 700px; height: 300px;"></textarea>
         </div>
         <div style="padding-top: 10px; padding-left: 120px;width: 780px;">
             <table style="background-color: black; color: black; margin: 3px;">
