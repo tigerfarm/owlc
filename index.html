@@ -77,7 +77,7 @@
                 logger("Refresh the token using client id: " + clientId);
                 //
                 var jqxhr = $.get("clientTokenGet.php?clientid=" + clientId + "&tokenPassword=" + $("#tokenPassword").val(), function (theToken) {
-                    // alert("theToken :" + theToken.trim()) + ":");
+                    alert("theToken :" + theToken.trim() + ":");
                     // Twilio.Device documentation: https://www.twilio.com/docs/api/client/device-13
                     // Optional, control sounds:
                     //   Twilio.Device.setup(theToken.trim(), { sounds: {
