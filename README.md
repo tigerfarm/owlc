@@ -2,6 +2,8 @@
 
 These are the steps to implement a Twilio JavaScript Web Client using Twilio Functions.
 
+Owl Client Screen print:
+
 <img src="ScreenPrint.jpg"/>
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/tigerfarm/OwlClient)
@@ -21,15 +23,11 @@ Requirements:
 - NodeJS installed to run the Client locally on your computer.
 Or a website that runs PHP programs such as Heroku. PHP is very common with service providers.
 
-Twilio Web Client Screen print:
-
-<img width="600px"  src="TwilioClientScreenPrint3.jpg"/>
-
 ## Files
 
 The Client files:
 - [index.html](index.html) : Twilio JavaScript (JS) Client to make and receive phone calls.
-- [client.css](client.css) : the Client HTML object styles
+- [custom/app.css](custom/app.css) : Styles
 
 The server files:
 - [nodeHttpServer.js](nodeHttpServer.js) : a NodeJS HTTP Server that serves the Client files and calls clientTokenGet.php.
