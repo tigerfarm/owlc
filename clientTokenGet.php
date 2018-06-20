@@ -21,6 +21,10 @@ if ($tokenClientId == "") {
     echo '-- TOKEN_HOST must be an environment variable.';
     return;
 }
+
+echo '-- tokenPassword:'+$tokenPassword+": TOKEN_PASSWORD:"+getenv('TOKEN_PASSWORD')+":";
+return;
+
 if ($tokenPassword !== getenv('TOKEN_PASSWORD')) {
     echo '-- Password invalid :'+$tokenPassword+":"+getenv('TOKEN_PASSWORD')+":";
     return;
