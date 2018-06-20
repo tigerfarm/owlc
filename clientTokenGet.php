@@ -22,7 +22,7 @@ if ($tokenClientId == "") {
     return;
 }
 if ($tokenPassword !== getenv('TOKEN_PASSWORD')) {
-    echo '-- Password invalid.';
+    echo '-- Password invalid :'+$tokenPassword+":"+getenv('TOKEN_PASSWORD')+":";
     return;
 }
 $theRequest = "https://" . $tokenHost . "/generateToken?clientid=" . $tokenClientId;
