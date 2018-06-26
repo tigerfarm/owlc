@@ -98,9 +98,17 @@
                 // .always(function () {alert("finished");});
             }
 
-            function setNumber() {
+            function setNumberc() {
                 // alert("set");
                 document.getElementById('number').value = "conference:support";
+            }
+            function setNumbereq() {
+                // alert("set");
+                document.getElementById('number').value = "enqueue:support";
+            }
+            function setNumberq() {
+                // alert("set");
+                document.getElementById('number').value = "queue:support";
             }
             function setClientId() {
                 clientId = $("#clientid").val();
@@ -166,7 +174,7 @@
                 <tbody style="background-color:#6782A8; border: 1px solid #000000; color: white; padding: 3px">
                     <tr>
                         <td style="background-color: white; color: black; padding: 3px; ">Conference</td>
-                        <td style="background-color: white; color: black; padding: 3px;"><a onClick="setNumber();" style="cursor: pointer; cursor: hand; color: blue; font-weight: bold;">conference:support</a></td>
+                        <td style="background-color: white; color: black; padding: 3px;"><a onClick="setNumberc();" style="cursor: pointer; cursor: hand; color: blue; font-weight: bold;">conference:support</a></td>
                         <td style="background-color: white; color: black; padding: 3px;">Music will play until until someone else joins.
                             <br/>Others can join the conference call.</td>
                     </tr>
@@ -183,13 +191,13 @@
                     </tr>
                     <tr>
                         <td style="background-color: white; color: black; padding: 3px;">Enqueue</td>
-                        <td style="background-color: white; color: black; padding: 3px;"><a onClick="setNumber();" style="cursor: pointer; cursor: hand; color: blue; font-weight: bold;">enqueue:support</a></td>
+                        <td style="background-color: white; color: black; padding: 3px;"><a onClick="setNumbereq();" style="cursor: pointer; cursor: hand; color: blue; font-weight: bold;">enqueue:support</a></td>
                         <td style="background-color: white; color: black; padding: 3px;">Call into a Twilio queue (enqueue).
                             <br/>Music will play until an agent calls the queue.</td>
                     </tr>
                     <tr>
                         <td style="background-color: white; color: black; padding: 3px;">De-queue</td>
-                        <td style="background-color: white; color: black; padding: 3px;"><a onClick="setNumber();" style="cursor: pointer; cursor: hand; color: blue; font-weight: bold;">queue:support</a></td>
+                        <td style="background-color: white; color: black; padding: 3px;"><a onClick="setNumberq();" style="cursor: pointer; cursor: hand; color: blue; font-weight: bold;">queue:support</a></td>
                         <td style="background-color: white; color: black; padding: 3px;">As an agent, call into the queue.
                             <br/>If there is a caller waiting, you will be connected.</td>
                     </tr>
