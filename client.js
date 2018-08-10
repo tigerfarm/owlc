@@ -101,6 +101,14 @@ function setNumberc() {
     // alert("set");
     document.getElementById('number').value = "conference:support";
 }
+function setClient() {
+    // alert("set");
+    document.getElementById('number').value = "client:";
+}
+function setSip() {
+    // alert("set");
+    document.getElementById('number').value = "sip:";
+}
 function setNumbereq() {
     // alert("set");
     document.getElementById('number').value = "enqueue:support";
