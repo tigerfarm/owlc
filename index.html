@@ -1,143 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
         <title>Owl Client</title>
         <link href="custom/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <link href="custom/app.css" rel="stylesheet"/>
-        <script type="text/javascript" src="https://media.twiliocdn.com/sdk/js/client/v1.4/twilio.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <!-- Popup keypad -->
         <link rel="stylesheet" href="jqueryKeypad.css"/>
         <script src="jqueryKeypad.js"></script>
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript">
-            $.fn.numpad.defaults.onKeypadCreate = function () {
-                $(this).enhanceWithin();
-            };
-            $(document).on('pageshow', function () {
-                $('#numpadButton-btn').numpad({
-                    positionX: 'center',
-                    positionY: 'top',
-                    textDone: 'Done'
-                });
-            }
-            );
-            $.mobile.loading().hide();  // Removes the "Loading" message.
-        </script>
-        <script type="text/javascript">
-            var tokenClientId = "owluser";
-            var clientId = tokenClientId;
-            var theConnection;
 
-            Twilio.Device.ready(function (device) {
-                logger("Ready.");
-            });
-            Twilio.Device.connect(function (conn) {
-                logger("Call connected.");
-                // https://www.twilio.com/docs/api/client/connection#outgoing-parameters
-                logger("+ CallSid: " + conn.parameters.CallSid);
-                theConnection = conn;
-            });
-            Twilio.Device.disconnect(function (conn) {
-                logger("Call ended.");
-            });
-            Twilio.Device.error(function (error) {
-                logger("Error: " + error.message);
-            });
-            Twilio.Device.incoming(function (conn) {
-                // Accept the incoming connection and start two-way audio
-                // https://www.twilio.com/docs/api/client/connection#incoming-parameters
-                logger("+ Incoming call, CallSid: " + conn.parameters.CallSid);
-                logger("+ To:     " + conn.parameters.To);
-                logger("+ From:   " + conn.parameters.From);
-                logger("+ Region: " + Twilio.Device.region());
-                conn.accept();
-                // Or conn.reject();
-            });
-            function call() {
-                logger("++ Make an outgoing call.");
-                setClientId();
-                if (clientId !== tokenClientId) {
-                    refresh();
-                }
-                logger("+ From: " + clientId);
-                logger("+ To:   " + $("#number").val());
-                params = {"To": $("#number").val(), "From": "client:" + clientId};
-                Twilio.Device.connect(params);
-            }
-            function hangup() {
-                logger("Hangup.");
-                Twilio.Device.disconnectAll();
-            }
-
-            function refresh() {
-                // Since, programs cannot make an Ajax call to a remote resource,
-                // Need to do an Ajax call to a local program that goes and gets the token.
-                logger("Refresh the token using client id: " + clientId);
-                //
-                var jqxhr = $.get("clientTokenGet.php?clientid=" + clientId + "&tokenPassword=" + $("#tokenPassword").val(), function (theToken) {
-                    alert("theToken :" + theToken.trim() + ":");
-                    // Twilio.Device documentation: https://www.twilio.com/docs/api/client/device-13
-                    // Optional, control sounds:
-                    //   Twilio.Device.setup(theToken.trim(), { sounds: {
-                    //      incoming: 'http://tigerfarmpress.com/tech/docs/sound/HAL.mp3',
-                    //      outgoing: 'http://tigerfarmpress.com/tech/docs/sound/st-affirmative.mp3'}});
-                    //      // https://www.twilio.com/docs/api/client/regions
-                    // Twilio.Device.setup(theToken.trim(), { region: "ie1" });
-                    Twilio.Device.setup(theToken.trim(), {debug: true});
-                    $("div.curClient").html("Current client id: <b>" + clientId + "</b>");
-                    logger("Token refreshed.");
-                    tokenClientId = clientId;
-                })
-                        // .done(function () {alert("second success");})
-                        .fail(function () {
-                            logger("- Error refreshing the token.");
-                            quit;
-                        });
-                // .always(function () {alert("finished");});
-            }
-
-            function setNumberc() {
-                // alert("set");
-                document.getElementById('number').value = "conference:support";
-            }
-            function setNumbereq() {
-                // alert("set");
-                document.getElementById('number').value = "enqueue:support";
-            }
-            function setNumberq() {
-                // alert("set");
-                document.getElementById('number').value = "queue:support";
-            }
-            function setClientId() {
-                clientId = $("#clientid").val();
-                if (clientId === "") {
-                    // logger("Use default token client id.");
-                    clientId = tokenClientId;
-                }
-            }
-            function refreshClientId() {
-                // logger("++ Refresh the Client Id (to-caller).");
-                setClientId();
-                refresh();
-            }
-            function logger(message) {
-                var log = document.getElementById('log');
-                log.value += "\n> " + message;
-                log.scrollTop = log.scrollHeight;
-            }
-            window.onload = function () {
-                log.value = "+++ Start.";
-                setClientId();
-                refresh();
-            };
-
-            function sendDigits(theDigit) {
-                // logger("sendDigits.");
-                theConnection.sendDigits(theDigit);
-            }
-        </script>
+        <script src="https://media.twiliocdn.com/sdk/js/client/v1.4/twilio.min.js"></script>
+        <link rel="stylesheet" href="client.css">
+        <script src="client.js"></script>
     </head>
     <body>
         <div id="topBar">
@@ -145,24 +20,46 @@
                     <td><a href="/index.html"><img src="custom/companyLogo.jpg" alt="Twilio" style="width:120px; padding-right: 30px;"/></a></td>
                     <td><h1>Owl Client Application</h1></td>
                 </tr></table>
-            <hr>
         </div>
-        <div class="company">
-            <h2>Client Dashboard</h2>
-            <table><tr>
-                    <td><button class="call" onclick="call();">Call</button></td>
-                    <td><button class="hangup" onclick="hangup();">Hangup</button></td>
-                    <td><button class="refresh" onclick="refreshClientId();">Refresh Token</button></td>
-                    <td>Keypad</td>
-                    <td><button id="numpadButton-btn" class="ui-btn ui-icon-grid ui-btn-icon-notext ui-alt-icon ui-nodisc-icon">&nbsp;</button></td>
-                </tr>
-            </table>
-            <table><tr><td style="width: 80px;">Client ID:</td><td><input type="text" id="clientid" name="clientid" placeholder="Enter client id"/></td><td><div class="curClient">Set Client ID.</div></td></tr></table>
-            <table><tr><td style="width: 80px;">Call to:</td><td><input type="text" id="number" name="number" placeholder="Enter who to call"/></td></tr></table>
-            <table><tr><td style="width: 80px;">Password:</td><td><input type="text" id="number" name="tokenPassword" placeholder="Enter password"/></td></tr></table>
-            <textarea id="log" style="width: 700px; height: 100px;"></textarea>
+        <div id="chatBox">
+            <div class="panelTitle">
+                Dashboard
+            </div>
+            <div style="margin-top: 6px;">
+                <table>
+                    <tr>
+                        <td><button id="btn-call" onclick="call();">Call</button></td>
+                        <td><button id="btn-hangup" onclick="hangup();">Hangup</button></td>
+                        <td><button id="btn-refresh" onclick="refreshClientId();">Refresh token</button></td>
+                        <td>Keypad</td>
+                        <td><button id="numpadButton-btn" class="ui-btn ui-icon-grid ui-btn-icon-notext ui-alt-icon ui-nodisc-icon">&nbsp;</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panelArea">
+                <table>
+                    <tr><td>Client ID </td><td><input id="clientid" type="text"/></td><td><div class="msgClientid">Set Client ID.</div></td></tr>
+                    <tr><td>Call to </td><td><input id="number" type="text"/></td></tr>
+                    <tr><td>Token password </td><td><input type="text" id="tokenPassword" name="tokenPassword" placeholder="Enter password"/></td><td><div class="msgTokenPassword"></div></tr>
+                </table>
+            </div>
         </div>
-        <div style="padding-top: 10px; padding-left: 120px;width: 780px;">
+        <div id="logBox">
+            <div class="panelTitle">
+                Log messages
+            </div>
+            <div class="panelArea">
+                <textarea id="log"></textarea>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td><button id="clearLog" onclick="clearLog();">Clear</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding-top: 10px; padding-left: 12px;width: 645px;">
             <table style="background-color: black; color: black; margin: 3px;">
                 <thead>
                     <tr>
@@ -212,7 +109,7 @@
         <div id="bottomBar">
             <img src="custom/logo.jpg" alt="Twilio"/>
             <div id="bottomContent">
-                <div style="padding-bottom: 10px;"><a href="https://github.com/tigerfarm/OwlClient" style="color: rgba(255,255,255,.65);">GitHub project</a></div>
+                <div style="padding-bottom: 10px;"><a href="https://github.com/tigerfarm/OwlClient" style="color: rgba(255,255,255,.65);">GitHub repository: OwlClient</a></div>
                 <a href="https://twilio.learnupon.com/store" style="color: rgba(255,255,255,.65);">Training</a>
                 | <a href="https://www.twilio.com/support-plans" style="color: rgba(255,255,255,.65);">Support</a>
                 | <a href="https://www.twilio.com/company" style="color: rgba(255,255,255,.65);">About Twilio</a>

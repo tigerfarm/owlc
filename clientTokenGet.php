@@ -26,14 +26,12 @@ if ($tokenClientId == "") {
 }
 
 echo "-- tokenPassword:" . $tokenPassword . ": TOKEN_PASSWORD:" . getenv('TOKEN_PASSWORD') . ":";
-return;
-
-if ($tokenPassword !== getenv('TOKEN_PASSWORD')) {
-    echo '-- Password invalid.";
+if ($tokenPassword != getenv('TOKEN_PASSWORD')) {
+    echo "-- Password invalid.";
     return;
 }
-$theRequest = "https://" . $tokenHost . "/generateToken?clientid=" . $tokenClientId;
-// echo '+ $theRequest :' . $theRequest . ': ';
+$theRequest = "https://" . $tokenHost . "/tokenclient?clientid=" . $tokenClientId;
+// echo "+ $theRequest :' . $theRequest . ': ';
 $token = file_get_contents($theRequest);
 echo $token;
 ?>
